@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Edit Task
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Edit Task</h1>
+        <form action="{{ path('app_task_process_edit') }}" method="post">
+            <input type="text" value="{{ task.title }}" name="title" id="title">
+            <input type="hidden" value="{{ task.id }}" name="id" id="id">
+            <button class="btn btn-success" type="submit">Edit Task</button>
+        </form>
+    </div>
+{% endblock %}
+

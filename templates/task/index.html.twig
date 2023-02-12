@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TaskController!{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="h1 text-center">Todo List</h1>
+        <ul class="list-group">
+            {% if tasks %}
+                {% for task in tasks %}
+                    <li class="list-group-item p-3">
+                        <div class="d-flex justify-content-start align-items-center">
+                            <input class="form-check-input m-1" type="checkbox" value="" name="task-{{ task.id }}" id="task-{{ task.id }}">
+                            <label class="form-check-label m-1" for="task-{{ task.id }}">{{ task.title }}</label>
+                            <a href="{{ path('app_task_edit', {
+                                'id': task.id
+                            }) }}" class="btn btn-sm btn-warning m-1 ms-auto">Edit</a>
+                            <a href="{{ path('app_task_delete', {
+                                'id': task.id
+                            }) }}" class="btn btn-sm btn-danger m-1">Delete</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li class="list-group-item p-3">
+                    No tasks...
+                </li>
+            {% endif %}
+            <li class="list-group-item p-3">
+                <div class="justify-content-start align-items-center">
+                    <form class="form" action="{{ path('app_task_create') }}" method="post">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="title" id="title" placeholder="Insert title...">
+                            <button type="submit" class="btn btn-outline-success ms-auto">Add New Task</button>
+                        </div>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
